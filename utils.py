@@ -1,6 +1,6 @@
 """
 Utils.py
-Author: Erik Serrano
+Developer: Erik Serrano
 
 utils.py package contains functions that aids in searching and indexing arrays
 

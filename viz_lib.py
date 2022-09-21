@@ -1,3 +1,12 @@
+"""
+viz_lib module
+Developer: Erik Serrano
+
+Module contains functions used for plotting data collected form the gene read
+counts and gene attributes datasets
+
+* make_box_plot - generates box plot of all gene counts across all tissue types
+"""
 from pathlib import Path
 import matplotlib.pyplot as plt
 

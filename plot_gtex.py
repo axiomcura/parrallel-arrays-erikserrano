@@ -1,3 +1,13 @@
+"""
+plot_gtex.py CLI Tool
+Developer: Erik Serrano
+
+plot_gtex is a CLI tool that takes in read counts and gene attributes dataset
+to generate boxplot.
+
+The generated boxplot contains the counts of your gene of interests across all
+tissue samples.
+"""
 import sys
 import gzip
 import argparse
