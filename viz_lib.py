@@ -1,3 +1,4 @@
+from pathlib import Path
 import matplotlib.pyplot as plt
 
 
@@ -25,7 +26,15 @@ def make_box_plot(
     None
         Generates a box plot file image in current working directory
     """
+    # setting output path
+    out_path_obj = Path(output_file)
+    parent_path = out_path_obj.parent
+    out_name = out_path_obj.name
+    ext = out_path_obj.suffix
 
+    save_path = parent_path / f"{out_name}"
+
+    # setting up plot figure
     _, ax = plt.subplots(figsize=(10, 4), dpi=300)
 
     # data prep for plotting
@@ -48,7 +57,6 @@ def make_box_plot(
     # squeezes plot into figure dimensions
     plt.tight_layout()
 
-    out_file = f"{output_file}.png"
-    plt.savefig(out_file)
+    plt.savefig(save_path)
 
     return None
