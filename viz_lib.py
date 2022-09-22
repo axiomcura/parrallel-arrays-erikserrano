@@ -39,7 +39,6 @@ def make_box_plot(
     out_path_obj = Path(output_file)
     parent_path = out_path_obj.parent
     out_name = out_path_obj.name
-    ext = out_path_obj.suffix
 
     save_path = parent_path / f"{out_name}"
 
