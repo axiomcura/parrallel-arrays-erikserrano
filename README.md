@@ -7,6 +7,8 @@
     - [plot_gtex install](#plot_gtex-install)
   - [Documentation](#documentation)
   - [Usage](#usage)
+    - [Download data](#download-data)
+    - [Execute plot_gtex](#execute-plot_gtex)
 
 `plot_gtex` is a simple CLI tools that generates a box plot that that captures all reads counts across all tissue types of a single gene.
 
@@ -45,7 +47,7 @@ cd assignment-3-parallel-arrays-axiomcura/
 After downloading the repository, create an environment that contains all the required dependencies
 
 ```text
-conda env create -f plot_gtex.yaml
+conda env create -f plot_gtex.yaml python=3.10
 ```
 
 and you are done!
@@ -53,3 +55,19 @@ and you are done!
 ## Documentation
 
 ## Usage
+
+### Download data
+
+To follow along with the usage example please download these datasets in the same directory where the code is:
+
+```text
+wget https://github.com/swe4s/lectures/raw/master/data_integration/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_reads.acmg_59.gct.gz
+```
+
+```text
+wget https://storage.googleapis.com/gtex_analysis_v8/annotations/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt
+```
+
+### Execute plot_gtex
+
+How
