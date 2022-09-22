@@ -86,10 +86,7 @@ def binary_search(target: str, indexed_sel_array: list[list[str, int]]) -> int:
     high_idx = len(indexed_sel_array)
 
     # conducting binary search for target element and return true index pos
-    count = 0
     while high_idx - low_idx > 1:
-        if count == 100:
-            break
 
         mid_idx = (high_idx + low_idx) // 2
 
@@ -100,10 +97,8 @@ def binary_search(target: str, indexed_sel_array: list[list[str, int]]) -> int:
         # checking where the target resides (left or right half of the array)
         if target.lower() < indexed_sel_array[mid_idx][0].lower():
             high_idx = mid_idx
-            count += 1
         else:
             low_idx = mid_idx
-            count += 1
 
     # raised if the target is not found
     raise ValueError
