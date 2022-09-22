@@ -77,4 +77,6 @@ def make_box_plot(
     # save figure
     plt.savefig(save_path)
 
+    print(f"MESSAGE: plot saved in: {str(save_path)}")
+
     return None
