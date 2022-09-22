@@ -226,7 +226,7 @@ def main() -> None:
     parser.add_argument(
         "-wt",
         "--fig_width",
-        type=str,
+        type=int,
         dest="fig_width",
         default=10,
         required=False,
@@ -235,7 +235,7 @@ def main() -> None:
     parser.add_argument(
         "-ht",
         "--fig_height",
-        type=str,
+        type=int,
         dest="fig_height",
         default=4,
         required=False,
