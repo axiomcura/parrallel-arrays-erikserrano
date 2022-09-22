@@ -159,7 +159,7 @@ plot_gtex.py \
 --gene ACTA2 \
 --output_file ACTA2.png \
 --fig_width 12 \
---fig_height 5 \
+--fig_height 5 
 ```
 
 By default, the figure width and height are set to 10, 4 respectively.
