@@ -57,7 +57,7 @@ cd assignment-3-parallel-arrays-axiomcura/
 After downloading the repository, create an environment that contains all the required dependencies
 
 ```text
-conda create -n plot_viz python=3.10
+conda create -n plot_viz python=3.10 -y
 ```
 
 Next to to activate you environment by typing:
