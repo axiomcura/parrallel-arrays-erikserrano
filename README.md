@@ -15,7 +15,7 @@
 
 ## v0.1 Update
 
-Wea are happy to announce our first release of `plot_gtex`! Features added in this program are:
+We are happy to announce our first release of `plot_gtex`! Features added in this program are:
 
 - Fully supported CLI
 - Plots all read counts across all tissues when specifying a gene of interest
