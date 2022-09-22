@@ -223,6 +223,24 @@ def main() -> None:
         required=True,
         help="Name of generated output plot",
     )
+    parser.add_argument(
+        "-wt",
+        "--fig_width",
+        type=str,
+        dest="fig_width",
+        default=10,
+        required=False,
+        help="Figure width size",
+    )
+    parser.add_argument(
+        "-ht",
+        "--fig_height",
+        type=str,
+        dest="fig_height",
+        default=4,
+        required=False,
+        help="Figure height size",
+    )
     args = parser.parse_args()
 
     # loading sample data
@@ -312,7 +330,11 @@ def main() -> None:
 
     # plot the the collected grouped_read_counts
     make_box_plot(
-        data=grouped_read_counts, gene_name=args.gene, output_file=args.output
+        data=grouped_read_counts,
+        gene_name=args.gene,
+        output_file=args.output,
+        fig_width=args.fig_width,
+        fig_height=args.fig_height,
     )
 
     print("Analysis complete!")

@@ -7,12 +7,17 @@ counts and gene attributes datasets
 
 * make_box_plot - generates box plot of all gene counts across all tissue types
 """
+from typing import Optional
 from pathlib import Path
 import matplotlib.pyplot as plt
 
 
 def make_box_plot(
-    data: list[list[str, int]], gene_name: str, output_file: str
+    data: list[list[str, int]],
+    gene_name: str,
+    output_file: str,
+    fig_width: Optional[int] = 10,
+    fig_height: Optional[int] = 4,
 ) -> None:
     """Generates box plots from grouped gene counts. Where the x axis
     represents tissue sample and y axis is the gene read counts.
@@ -29,6 +34,10 @@ def make_box_plot(
         name of the gene searched. Will be used to plot
     output_file : str
         name of generated box plot file
+    fig_width: int,
+        width size of the figure
+    fig_height : int
+        height size of the figure
 
     Return
     ------
@@ -43,7 +52,7 @@ def make_box_plot(
     save_path = parent_path / f"{out_name}"
 
     # setting up plot figure
-    _, ax = plt.subplots(figsize=(10, 4), dpi=300)
+    _, ax = plt.subplots(figsize=(fig_width, fig_height), dpi=300)
 
     # data prep for plotting
     sample_types = [group_samples[0] for group_samples in data]
