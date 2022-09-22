@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
+    name="plot_viz",
     author="Erik Serrano",
     description="Gene reads CLI Tool",
     version="0.1",
