@@ -74,6 +74,7 @@ def make_box_plot(
     # squeezes plot into figure dimensions
     plt.tight_layout()
 
+    # save figure
     plt.savefig(save_path)
 
     return None

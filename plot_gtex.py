@@ -304,10 +304,10 @@ def main() -> None:
         print(f"{e_type}: {e_msg}")
         sys.exit(1)
 
-    # getting row position based where the GOI is located
+    # getting row entry position based on where the GOI is located
     gene_reads_entry = reads[gene_idx_pos]
 
-    # iterating all tissue samples with associated members
+    # iterating all tissue samples with associated sample members
     grouped_read_counts = []
     for tissue_samp, sample_members in group_members:
 
