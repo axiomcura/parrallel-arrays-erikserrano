@@ -9,6 +9,7 @@
   - [Documentation](#documentation)
   - [Usage](#usage)
     - [Download data](#download-data)
+    - [Testing](#testing)
     - [Use Case](#use-case)
 
 `plot_gtex` is a simple Conmmand Line Interface (CLI) tool that generates a box plot that that captures all reads counts across all tissue types of a single gene.
@@ -126,6 +127,16 @@ wget https://storage.googleapis.com/gtex_analysis_v8/annotations/GTEx_Analysis_v
 ```
 
 After downloading the dataset, you can follow along on how to use `plot_gtxt`
+
+### Testing
+
+To execute a test run, simply type:
+
+```text
+./run.sh
+```
+
+`./run.sh` will will download the dataset, initializing testing (unit, functional and styling), and execute a usage example
 
 ### Use Case
 
