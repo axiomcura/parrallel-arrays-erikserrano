@@ -52,8 +52,23 @@ class SearchAlgorithms(unittest.TestCase):
                 self.assertTrue(index <= 9)
 
     def test_linear_search_4(self) -> None:
-        """Tests multiple of mixed type arrays"""
+        """Testing with empty list"""
+        empty_list = []
+        target = "consectetur"
+
+        self.assertRaises(RuntimeError, utils.linear_search, target, empty_list)
         pass
+
+    def test_linear_search_5(self) -> None:
+        """Testing linear search with non sequence object"""
+        dict_obj = {"should": 1, "world": 2, "work": 3}
+        set_obj = {"hello", "world"}
+        target = "world"
+
+        self.assertRaises(TypeError, utils.linear_search, target, dict_obj)
+        self.assertRaises(TypeError, utils.linear_search, target, set_obj)
+
+
 
     def test_list_indexing(self) -> None:
         """Positive case"""
