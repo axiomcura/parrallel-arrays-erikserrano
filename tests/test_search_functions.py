@@ -1,4 +1,9 @@
-from operator import index
+"""
+test_search_functions.py
+
+testing module that tests both linear and binary search algorithm.
+
+"""
 import os
 import pickle
 import random
