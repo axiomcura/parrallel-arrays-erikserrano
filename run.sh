@@ -17,4 +17,3 @@ plot_gtex.py \
 --sample_attributes GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt \
 --gene ACTA2 \
 --output_file ACTA2.png
-
