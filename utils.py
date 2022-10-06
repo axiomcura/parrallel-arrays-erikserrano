@@ -16,6 +16,7 @@ utils.py package contains functions that aids in searching and indexing arrays
                index values for each element.
 """
 from typing import Any
+from typing import Sequence
 
 
 def linear_search(target: str, sel_array: list[str]) -> int:
@@ -40,6 +41,10 @@ def linear_search(target: str, sel_array: list[str]) -> int:
     ------
     ValueError
         raised if the target cannot be found within the provided array
+    RuntimeError
+        raised if empty list was provided
+    TypeError
+        raised if a non sequences objects are passed (tuples or lists only)
 
     Example
     -------
@@ -48,6 +53,12 @@ def linear_search(target: str, sel_array: list[str]) -> int:
     >>> print(indx_pos)
     1
     """
+    # type checking
+    if not isinstance(sel_array, Sequence):
+        raise TypeError("Only tuples or lists are supported")
+    if len(sel_array) == 0:
+        raise RuntimeError("Empty list porivded")
+
     for idx, field in enumerate(sel_array):
         if target == field:
             return idx
@@ -123,6 +134,13 @@ def index_list(sel_array: list[Any]) -> list[list[Any, int]]:
         element is the original element from the provided array and the second
         element corresponds to its index position within the provided array.
 
+    Raises
+    ------
+    ValueError
+        Raised if an empty list is provided
+    TypeError
+        Raised if a non-Sequence type object is provided. Sequence types are
+        lists and tuple objects.
 
     Example
     -------
@@ -133,5 +151,10 @@ def index_list(sel_array: list[Any]) -> list[list[Any, int]]:
 
     """
     # using list comprehension to to generate list of lists
+    if not len(sel_array) > 0:
+        raise ValueError("Empty list is provided")
+    if not isinstance(sel_array, Sequence):
+        raise TypeError("sel_arry must be either a list or a tuple array")
+
     indexed_elements = [[elm, idx] for idx, elm in enumerate(sel_array)]
     return indexed_elements

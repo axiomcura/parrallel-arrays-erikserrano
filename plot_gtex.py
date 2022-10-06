@@ -180,6 +180,13 @@ def group_samples_by_tissues(
             sample_groups.append(current_group)
             group_members.append([])
 
+        # if list is empty, start tracking
+        except RuntimeError as e:
+            current_group_idx = len(sample_groups)
+            sample_groups.append(current_group)
+            group_members.append([])
+            continue
+
         # if the group exists within the sample_groups array, use the idx
         # position of the current group and append it to the members list
         group_members[current_group_idx].append(sample_name)
