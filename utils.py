@@ -16,6 +16,7 @@ utils.py package contains functions that aids in searching and indexing arrays
                index values for each element.
 """
 from typing import Any
+from typing import Sequence
 
 
 def linear_search(target: str, sel_array: list[str]) -> int:
@@ -123,6 +124,13 @@ def index_list(sel_array: list[Any]) -> list[list[Any, int]]:
         element is the original element from the provided array and the second
         element corresponds to its index position within the provided array.
 
+    Raises
+    ------
+    ValueError
+        Raised if an empty list is provided
+    TypeError
+        Raised if a non-Sequence type object is provided. Sequence types are
+        lists and tuple objects.
 
     Example
     -------
@@ -133,5 +141,10 @@ def index_list(sel_array: list[Any]) -> list[list[Any, int]]:
 
     """
     # using list comprehension to to generate list of lists
+    if not len(sel_array) > 0:
+        raise ValueError("Empty list is provided")
+    if not isinstance(sel_array, Sequence):
+        raise TypeError("sel_arry must be either a list or a tuple array")
+
     indexed_elements = [[elm, idx] for idx, elm in enumerate(sel_array)]
     return indexed_elements
