@@ -2,7 +2,7 @@
 # plot_gtex
 
 - [plot_gtex](#plot_gtex)
-  - [v0.1 Update](#v01-update)
+  - [v0.2 Update](#v02-update)
   - [Installation](#installation)
     - [Installing Anaconda](#installing-anaconda)
     - [plot_gtex install](#plot_gtex-install)
@@ -13,14 +13,13 @@
 
 `plot_gtex` is a simple Conmmand Line Interface (CLI) tool that generates a box plot that that captures all reads counts across all tissue types of a single gene.
 
-## v0.1 Update
+## v0.2 Update
 
-We are happy to announce our first release of `plot_gtex`! Features added in this program are:
+We are happy to announce our second release of `plot_gtex`! Features added in this release are:
 
-- Fully supported CLI
-- Plots all read counts across all tissues when specifying a gene of interest
-  - Users can control the size of the plot with the CLI parameters
-- can read compressed read files
+- includes rigorous testing for all function to ensure each function works properly
+- include functional testing to ensure that communication between functions works properly
+- tests for best styling practices dictated by `pycodestyle`
 
 ## Installation
 
@@ -159,7 +158,7 @@ plot_gtex.py \
 --gene ACTA2 \
 --output_file ACTA2.png \
 --fig_width 12 \
---fig_height 5 
+--fig_height 5
 ```
 
 By default, the figure width and height are set to 10, 4 respectively.
