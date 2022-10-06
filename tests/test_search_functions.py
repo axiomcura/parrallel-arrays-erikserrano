@@ -132,7 +132,7 @@ class SearchAlgorithms(unittest.TestCase):
                 self.assertEqual(type(index), int)
 
     def test_binary_search_2(self) -> None:
-        """applying multiple binary searchs that lead to a negative case,
+        """applying multiple binary searches that lead to a negative case,
         capturing  exception
         """
 
