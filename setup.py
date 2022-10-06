@@ -7,6 +7,6 @@ setup(
     version="0.1",
     python_requires=">3.10",
     packages=find_packages(),
-    install_requires=["matplotlib"],
+    install_requires=["matplotlib", "pycodestyle"],
     scripts=["plot_gtex.py"],
 )

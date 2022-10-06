@@ -8,7 +8,6 @@ import os
 import pickle
 import random
 import unittest
-
 import utils
 
 
@@ -61,7 +60,9 @@ class SearchAlgorithms(unittest.TestCase):
         empty_list = []
         target = "consectetur"
 
-        self.assertRaises(RuntimeError, utils.linear_search, target, empty_list)
+        self.assertRaises(
+            RuntimeError, utils.linear_search, target, empty_list
+        )
         pass
 
     def test_linear_search_5(self) -> None:
@@ -72,8 +73,6 @@ class SearchAlgorithms(unittest.TestCase):
 
         self.assertRaises(TypeError, utils.linear_search, target, dict_obj)
         self.assertRaises(TypeError, utils.linear_search, target, set_obj)
-
-
 
     def test_list_indexing(self) -> None:
         """Positive case"""
@@ -138,8 +137,8 @@ class SearchAlgorithms(unittest.TestCase):
         self.assertRaises(ValueError, utils.index_list, empty_tuple)
 
     def test_binary_search_1(self) -> None:
-        """Binary search of randomly shuffled list test case where a target is not found within
-        the provided array"""
+        """Binary search of randomly shuffled list test case where a target
+        is not found within the provided array"""
 
         with open("string_data.pickle", "rb") as f:
             loaded_data = pickle.load(f)
