@@ -41,6 +41,10 @@ def linear_search(target: str, sel_array: list[str]) -> int:
     ------
     ValueError
         raised if the target cannot be found within the provided array
+    RuntimeError
+        raised if empty list was provided
+    TypeError
+        raised if a non sequences objects are passed (tuples or lists only)
 
     Example
     -------
@@ -49,6 +53,12 @@ def linear_search(target: str, sel_array: list[str]) -> int:
     >>> print(indx_pos)
     1
     """
+    # type checking
+    if not isinstance(sel_array, Sequence):
+        raise TypeError("Only tuples or lists are supported")
+    if len(sel_array) == 0:
+        raise RuntimeError("Empty list porivded")
+
     for idx, field in enumerate(sel_array):
         if target == field:
             return idx
