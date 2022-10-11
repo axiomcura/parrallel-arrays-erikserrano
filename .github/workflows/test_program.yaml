@@ -38,7 +38,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: plot_gtex
-          environment-file: environment.yaml
+          environment-file: env.yaml
       - run: |
           cd test/functional
           bash run.sh
