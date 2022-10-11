@@ -26,7 +26,7 @@ jobs:
           activate-environment: plot_gtex
           environment-file: environment.yaml
       - run: |
-          cd tests/
+          cd tests/unit
           python -m unittest test_search_functions
   functional_tests:
     runs-on: ubuntu-latest
@@ -40,5 +40,5 @@ jobs:
           activate-environment: plot_gtex
           environment-file: environment.yaml
       - run: |
-          cd test/functional
+          cd tests/functional
           bash run.sh
