@@ -26,7 +26,7 @@ jobs:
           activate-environment: plot_gtex
           environment-file: environment.yaml
       - run: |
-          pip installe -e .
+          pip install -e .
           cd tests/unit
           python -m unittest test_search_functions
   functional_tests:
