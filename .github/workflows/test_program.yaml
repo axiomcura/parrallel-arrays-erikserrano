@@ -26,6 +26,7 @@ jobs:
           activate-environment: plot_gtex
           environment-file: environment.yaml
       - run: |
+          pip installe -e .
           cd tests/unit
           python -m unittest test_search_functions
   functional_tests:
@@ -40,5 +41,6 @@ jobs:
           activate-environment: plot_gtex
           environment-file: environment.yaml
       - run: |
+          pip install -e .
           cd tests/functional
-          bash run.sh
+          bash run_func_test.sh
