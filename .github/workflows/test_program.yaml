@@ -9,14 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash -1 {0}
+        shell: bash -l {0}
     steps:
       - uses: actions/checkout@v2
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: plot_gtex
           environment-file: env.yaml
-      - run: pycodestyle $(git ls-files *.py)
+      - run: pycodestyle $(git ls-files "*.py")
+
   run_unit_tests:
     runs-on: ubuntu-latest
     steps:
