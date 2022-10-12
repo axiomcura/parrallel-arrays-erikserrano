@@ -15,11 +15,12 @@ utils.py package contains functions that aids in searching and indexing arrays
 * index_list - generates a list of lists where the nested list contains index
                index values for each element.
 """
+from typing import List
 from typing import Any
 from typing import Sequence
 
 
-def linear_search(target: str, sel_array: list[str]) -> int:
+def linear_search(target: str, sel_array: List[str]) -> int:
     """Searches target value within given array. If the target is found, an
     ValueError will be raised. If found, it will return the index position
     where the target resides in the provided array.
@@ -65,7 +66,7 @@ def linear_search(target: str, sel_array: list[str]) -> int:
     raise ValueError
 
 
-def binary_search(target: str, indexed_sel_array: list[list[str, int]]) -> int:
+def binary_search(target: str, indexed_sel_array: List[List[str, int]]) -> int:
     """Conducted a binary search on a provided indexed array. The indexed array
     should be a list of lists were the nested list contains string and an
     integer that represents the position where the string entry resides in.
@@ -115,7 +116,7 @@ def binary_search(target: str, indexed_sel_array: list[list[str, int]]) -> int:
     raise ValueError
 
 
-def index_list(sel_array: list[Any]) -> list[list[Any, int]]:
+def index_list(sel_array: List[Any]) -> List[List[Any, int]]:
     """Adds index position to provided list. Returns a list of nested lists,
     where each nested list contains two elements. The first element is the
     original element obtained from the sel_array parameter. The second element

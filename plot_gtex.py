@@ -11,13 +11,14 @@ tissue samples.
 import sys
 import gzip
 import argparse
+from typing import List
 from utils import linear_search
 from utils import binary_search
 from utils import index_list
 from viz_lib import make_box_plot
 
 
-def load_samples(sample_file: str) -> list[list[str]]:
+def load_samples(sample_file: str) -> List[List[str]]:
     """Reads sample file and generates a list of lists. Where each nested lists
     represents a row entry within the the sample file.
 
@@ -70,7 +71,7 @@ def load_samples(sample_file: str) -> list[list[str]]:
     return [header, samples]
 
 
-def load_reads(reads_file: str) -> list[list[str]]:
+def load_reads(reads_file: str) -> List[List[str]]:
     """Loads in gene reads
 
     Parameters
@@ -135,8 +136,8 @@ def load_reads(reads_file: str) -> list[list[str]]:
 
 
 def group_samples_by_tissues(
-    samples: list[list[str]], sample_id_col_idx: int, group_col_idx: int
-) -> list[list[str]]:
+    samples: List[List[str]], sample_id_col_idx: int, group_col_idx: int
+) -> List[List[str]]:
     """Groups sample ids to their appropriate sample group.
 
     Parameters
