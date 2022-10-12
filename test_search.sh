@@ -10,5 +10,5 @@ run binary_search python search.py -i toydata/lorem_ipsum_data.txt -t dolor -a b
 assert_in_stdout 2
 assert_exit_code 0
 
-run check_styling pycodestyle *.py tests/*.py
+run check_styling pycodestyle *.py tests/unit/*.py
 assert_exit_code 0

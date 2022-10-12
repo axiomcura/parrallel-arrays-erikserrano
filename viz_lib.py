@@ -7,6 +7,7 @@ counts and gene attributes datasets
 
 * make_box_plot - generates box plot of all gene counts across all tissue types
 """
+from typing import Union
 from typing import List
 from typing import Optional
 from pathlib import Path
@@ -14,7 +15,7 @@ import matplotlib.pyplot as plt
 
 
 def make_box_plot(
-    data: List[List[str, int]],
+    data: List[List[Union[str, int]]],
     gene_name: str,
     output_file: str,
     fig_width: Optional[int] = 10,
