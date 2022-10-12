@@ -3,9 +3,10 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python==3.10.*
+  - python==3.10
   - pip
-  - matplotlib>=3.5
+  - matplotlib
+  - numpy
   - pip:
-    - pycodestyle==2.9.1
+    - pycodestyle
 prefix: /Users/erikserrano/Programs/miniconda3/envs/plot_gtex
