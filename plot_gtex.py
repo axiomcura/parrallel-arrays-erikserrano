@@ -31,7 +31,7 @@ def load_samples(sample_file: str) -> List[List[str]]:
     Returns
     -------
     list[list[str]]
-        return a list that contains two groups. The first group is the haeder
+        return a list that contains two groups. The first group is the header
         list and the second group is a list of list that contains all the row
         entries of the sample file.
 
