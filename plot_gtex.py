@@ -8,10 +8,12 @@ to generate boxplot.
 The generated boxplot contains the counts of your gene of interests across all
 tissue samples.
 """
+
 import sys
 import gzip
 import argparse
 from typing import List
+from typing import Any
 from utils import linear_search
 from utils import binary_search
 from utils import index_list
@@ -19,7 +21,7 @@ from utils import filter_by_mean
 from viz_lib import make_box_plot
 
 
-def load_samples(sample_file: str) -> List[List[str]]:
+def load_samples(sample_file: str) -> List[Any]:
     """Reads sample file and generates a list of lists. Where each nested lists
     represents a row entry within the the sample file.
 
