@@ -183,7 +183,7 @@ def read_count_mean(count_array: List[int]) -> float:
         if a non numerical type is captured or a List object is not provided
     """
     # checking data type
-    if not isinstance(count_array, Sequence):
+    if not isinstance(count_array, List):
         raise TypeError("count_array must be list")
 
     if len(count_array) == 0:
@@ -192,6 +192,7 @@ def read_count_mean(count_array: List[int]) -> float:
 
     # checking element types
     for num in count_array:
+        print(num)
         if isinstance(num, int) or isinstance(num, float):
             continue
         else:
