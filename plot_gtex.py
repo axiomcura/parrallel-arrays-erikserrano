@@ -12,7 +12,6 @@ import sys
 import gzip
 import argparse
 from typing import List
-from typung import Union
 from utils import linear_search
 from utils import binary_search
 from utils import index_list
