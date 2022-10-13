@@ -4,10 +4,12 @@ test_search_functions.py
 testing module that tests both linear and binary search algorithm.
 
 """
+from distutils import util
 import os
 import pickle
 import random
 import unittest
+
 import utils
 
 
@@ -214,6 +216,10 @@ class SearchAlgorithms(unittest.TestCase):
 
 
 class MeanCalculationTest(unittest.TestCase):
+
+    # ------------------------------
+    # Mean Calculation Tests
+    # ------------------------------
     def test_mean_empty_list(self) -> None:
         """Testing read_count_mean() with empty list"""
         read_counts = []
@@ -284,12 +290,33 @@ class MeanCalculationTest(unittest.TestCase):
             group_name, read_counts = group_data[0], group_data[1]
             self.assertRaises(TypeError, utils.read_count_mean, read_counts)
 
+    def test_known_ints_mean(self) -> None:
+        """Calculates mean of known array"""
+
+        with open("seeded_array_counts_ints.pickle", "rb") as f:
+            test_readcount_data = pickle.load(f)
+
+        true_mean = 1910.51
+        test_mean = utils.read_count_mean(test_readcount_data)
+
+        self.assertEqual(true_mean, test_mean)
+
+    # ------------------------------
+    # Thresholding Tests
+    # ------------------------------
+
+    # ------------------------------
+    # Tests setup methods
+    # ------------------------------
     @classmethod
     def setUp(cls) -> None:
+
+        # file names
         cls.group_ints = "group_ints.pickle"
         cls.group_floats = "group_floats.pickle"
         cls.group_ints_floats = "grouped_int_floats.pickle"
         cls.group_ints_floats_str = "group_ints_floats_str.pickle"
+        cls.seeded_array_counts_ints = "seeded_array_counts_ints.pickle"
 
         # setting up names and variables
         random_groups = ["Blood", "Kidney", "Brain"]
@@ -297,13 +324,14 @@ class MeanCalculationTest(unittest.TestCase):
             "Lorem ipsum dolor sit amet consectetur adipiscing elit".split()
         )
 
+        # generating toy data with different types
         grouped_ints = []
         grouped_floats = []
         grouped_int_floats = []
         grouped_int_floats_str = []
         for group in random_groups:
 
-            # generating random value measurments
+            # generating random value measurements
             read_counts_ints = [random.randint(0, 4000) for _ in range(200)]
             read_counts_floats = [
                 round(random.random() * 1000, 2) for _ in range(200)
@@ -347,6 +375,11 @@ class MeanCalculationTest(unittest.TestCase):
 
         with open(cls.group_ints_floats_str, mode="wb") as f:
             pickle.dump(grouped_int_floats_str, f)
+
+        with open(cls.seeded_array_counts_ints, mode="wb") as f:
+            random.seed(42)
+            seeded_array = [random.randint(0, 4000) for _ in range(200)]
+            pickle.dump(seeded_array, f)
 
     @classmethod
     def tearDown(cls) -> None:
