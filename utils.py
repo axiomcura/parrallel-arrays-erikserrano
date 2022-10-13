@@ -192,7 +192,6 @@ def read_count_mean(count_array: List[int]) -> float:
 
     # checking element types
     for num in count_array:
-        print(num)
         if isinstance(num, int) or isinstance(num, float):
             continue
         else:
