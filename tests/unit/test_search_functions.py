@@ -305,6 +305,43 @@ class MeanCalculationTest(unittest.TestCase):
     # Thresholding Tests
     # ------------------------------
 
+    def test_filter_non_lists(self) -> None:
+        """testing on non list objects"""
+        grouped_data_1 = (("Blood"), (1, 2, 3, 4))
+        grouped_data_2 = (("Blood"), (1.0, 2.0, 3.0, 4.0))
+        grouped_data_3 = (("Blood"), (1, 2.0, 3, 4.0))
+        grouped_data_4 = [("Blood"), (1, 2.0, 3, 4.0)]
+        grouped_data_5 = (["Blood"], [1, 2, 3, 4])
+        grouped_data_6 = (["Blood"], [1.0, 2, 3, 4.0])
+
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_1)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_2)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_3)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_4)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_5)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_6)
+
+    def test_filter_empty_list(self) -> None:
+        """Testing if filtering process gets an empty list"""
+        empty_array = []
+        self.assertRaises(ValueError, utils.filter_by_mean, empty_array)
+
+    def test_filter_missing_group(self) -> None:
+        """Testing filter process if group name is missing"""
+        test_data1 = [1, 2, 3, 4, 5]
+        test_data2 = [1, 2.0, 3, 4.0, 5]
+
+        self.assertRaises(TypeError, utils.filter_by_mean, test_data1)
+        self.assertRaises(TypeError, utils.filter_by_mean, test_data2)
+
+    def test_non_int_threshold(self) -> None:
+        """Tests if threshold is a non int value"""
+        with open("group_ints.pickle", "rb") as f:
+            group_data = pickle.load(f)
+
+        self.assertRaises(TypeError, utils. filter_by_mean, group_data, threshold="10")
+        self.assertRaises(TypeError, utils. filter_by_mean, group_data, threshold="10")
+
     # ------------------------------
     # Tests setup methods
     # ------------------------------
