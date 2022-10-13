@@ -4,7 +4,6 @@ test_search_functions.py
 testing module that tests both linear and binary search algorithm.
 
 """
-from distutils import util
 import os
 import pickle
 import random
@@ -339,8 +338,12 @@ class MeanCalculationTest(unittest.TestCase):
         with open("group_ints.pickle", "rb") as f:
             group_data = pickle.load(f)
 
-        self.assertRaises(TypeError, utils. filter_by_mean, group_data, threshold="10")
-        self.assertRaises(TypeError, utils. filter_by_mean, group_data, threshold="10")
+        self.assertRaises(
+            TypeError, utils.filter_by_mean, group_data, threshold="10"
+        )
+        self.assertRaises(
+            TypeError, utils.filter_by_mean, group_data, threshold="ten"
+        )
 
     # ------------------------------
     # Tests setup methods
