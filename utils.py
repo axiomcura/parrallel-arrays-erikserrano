@@ -192,9 +192,7 @@ def read_count_mean(count_array: List[int]) -> float:
 
     # checking element types
     for num in count_array:
-        if isinstance(num, int) or isinstance(num, float):
-            continue
-        else:
+        if not isinstance(num, int) and not isinstance(num, float):
             _type = type(num)
             msg = f"Only integers and floats allowed, you provided {_type}"
             raise TypeError(msg)
