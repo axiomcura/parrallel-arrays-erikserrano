@@ -162,3 +162,46 @@ def index_list(sel_array: List[Any]) -> List[Union[Any, int]]:
 
     indexed_elements = [[elm, idx] for idx, elm in enumerate(sel_array)]
     return indexed_elements
+
+
+def read_count_mean(count_array: List[int]) -> float:
+    """Returns the mean of a given read count
+
+    Parameters
+    ----------
+    count_array : List[int]
+        array that contains read counts of a given group
+
+    Returns
+    -------
+    float
+        mean value of all counts
+
+    Raises
+    ------
+    TypeError
+        if a non numerical type is captured or a List object is not provided
+    """
+    # checking data type
+    if not isinstance(count_array, Sequence):
+        raise TypeError("count_array must be list")
+
+    if len(count_array) == 0:
+        print("Warning: Array with no length captured. Mean set to 0")
+        return 0
+
+    # checking element types
+    for num in count_array:
+        if isinstance(num, int) or isinstance(num, float):
+            continue
+        else:
+            _type = type(num)
+            msg = f"Only integers and floats allowed, you provided {_type}"
+            raise TypeError(msg)
+
+    # calculating mean
+    _sum = sum(count_array)
+    mean = round(_sum / len(count_array), 2)
+
+    # result
+    return mean
