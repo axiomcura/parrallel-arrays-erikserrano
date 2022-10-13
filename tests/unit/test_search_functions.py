@@ -8,6 +8,7 @@ import os
 import pickle
 import random
 import unittest
+
 import utils
 
 
@@ -211,6 +212,221 @@ class SearchAlgorithms(unittest.TestCase):
         os.remove(cls.string_array)
         os.remove(cls.multi_line_ints)
         os.remove(cls.mixed_chars_array)
+
+
+class MeanCalculationTest(unittest.TestCase):
+
+    # ------------------------------
+    # Mean Calculation Tests
+    # ------------------------------
+    def test_mean_empty_list(self) -> None:
+        """Testing read_count_mean() with empty list"""
+        read_counts = []
+        mean = utils.read_count_mean(read_counts)
+        self.assertEqual(0, mean)
+
+    def test_mean_different_sequences(self) -> None:
+        """Tests functionality of read_count_mean() with different Sequence
+        types other than Lists
+        """
+        read_counts1 = []
+        read_counts2 = ()
+        read_counts3 = {}
+
+        mean1 = utils.read_count_mean(read_counts1)
+        self.assertEqual(0, mean1)
+        self.assertRaises(TypeError, utils.read_count_mean, read_counts2)
+        self.assertRaises(TypeError, utils.read_count_mean, read_counts3)
+
+    def test_mean_only_int_vals(self) -> None:
+        """Tests read_count_mean() on integer arrays"""
+        with open("group_ints.pickle", "rb") as f:
+            group_datasets = pickle.load(f)
+
+        for group_data in group_datasets:
+            group_name, read_counts = group_data[0], group_data[1]
+
+            true_mean = round(sum(read_counts) / len(read_counts), 2)
+            test_mean = utils.read_count_mean(read_counts)
+
+            self.assertEqual(true_mean, test_mean)
+
+    def test_mean_only_float_vals(self) -> None:
+        with open("group_floats.pickle", "rb") as f:
+            group_datasets = pickle.load(f)
+
+        for group_data in group_datasets:
+            group_name, read_counts = group_data[0], group_data[1]
+
+            true_mean = round(sum(read_counts) / len(read_counts), 2)
+            test_mean = utils.read_count_mean(read_counts)
+
+            self.assertEqual(true_mean, test_mean)
+
+    def test_mean_float_and_ints(self) -> None:
+        with open("grouped_int_floats.pickle", "rb") as f:
+            group_datasets = pickle.load(f)
+
+        for group_data in group_datasets:
+            group_name, read_counts = group_data[0], group_data[1]
+            true_mean = round(sum(read_counts) / len(read_counts), 2)
+            test_mean = utils.read_count_mean(read_counts)
+
+            self.assertEqual(true_mean, test_mean)
+
+    def test_mean_str(self) -> None:
+        """Tests read_count_mean() when given strings to conduct the mean"""
+        group_data = [["Blood"], ["a", "b", "c"]]
+        self.assertRaises(TypeError, utils.read_count_mean, group_data)
+
+    def test_mean_float_ints_str(self) -> None:
+        """test read_count_mean() with group data that contains ints, floats,
+        str"""
+        with open("group_ints_floats_str.pickle", "rb") as f:
+            group_datasets = pickle.load(f)
+
+        for group_data in group_datasets:
+            group_name, read_counts = group_data[0], group_data[1]
+            self.assertRaises(TypeError, utils.read_count_mean, read_counts)
+
+    def test_known_ints_mean(self) -> None:
+        """Calculates mean of known array"""
+
+        with open("seeded_array_counts_ints.pickle", "rb") as f:
+            test_readcount_data = pickle.load(f)
+
+        true_mean = 1910.51
+        test_mean = utils.read_count_mean(test_readcount_data)
+
+        self.assertEqual(true_mean, test_mean)
+
+    # ------------------------------
+    # Thresholding Tests
+    # ------------------------------
+
+    def test_filter_non_lists(self) -> None:
+        """testing on non list objects"""
+        grouped_data_1 = (("Blood"), (1, 2, 3, 4))
+        grouped_data_2 = (("Blood"), (1.0, 2.0, 3.0, 4.0))
+        grouped_data_3 = (("Blood"), (1, 2.0, 3, 4.0))
+        grouped_data_4 = [("Blood"), (1, 2.0, 3, 4.0)]
+        grouped_data_5 = (["Blood"], [1, 2, 3, 4])
+        grouped_data_6 = (["Blood"], [1.0, 2, 3, 4.0])
+
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_1)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_2)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_3)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_4)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_5)
+        self.assertRaises(TypeError, utils.filter_by_mean, grouped_data_6)
+
+    def test_filter_empty_list(self) -> None:
+        """Testing if filtering process gets an empty list"""
+        empty_array = []
+        self.assertRaises(ValueError, utils.filter_by_mean, empty_array)
+
+    def test_filter_missing_group(self) -> None:
+        """Testing filter process if group name is missing"""
+        test_data1 = [1, 2, 3, 4, 5]
+        test_data2 = [1, 2.0, 3, 4.0, 5]
+
+        self.assertRaises(TypeError, utils.filter_by_mean, test_data1)
+        self.assertRaises(TypeError, utils.filter_by_mean, test_data2)
+
+    def test_non_int_threshold(self) -> None:
+        """Tests if threshold is a non int value"""
+        with open("group_ints.pickle", "rb") as f:
+            group_data = pickle.load(f)
+
+        self.assertRaises(
+            TypeError, utils.filter_by_mean, group_data, threshold="10"
+        )
+        self.assertRaises(
+            TypeError, utils.filter_by_mean, group_data, threshold="ten"
+        )
+
+    # ------------------------------
+    # Tests setup methods
+    # ------------------------------
+    @classmethod
+    def setUp(cls) -> None:
+
+        # file names
+        cls.group_ints = "group_ints.pickle"
+        cls.group_floats = "group_floats.pickle"
+        cls.group_ints_floats = "grouped_int_floats.pickle"
+        cls.group_ints_floats_str = "group_ints_floats_str.pickle"
+        cls.seeded_array_counts_ints = "seeded_array_counts_ints.pickle"
+
+        # setting up names and variables
+        random_groups = ["Blood", "Kidney", "Brain"]
+        lorem_ipsum_array = (
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit".split()
+        )
+
+        # generating toy data with different types
+        grouped_ints = []
+        grouped_floats = []
+        grouped_int_floats = []
+        grouped_int_floats_str = []
+        for group in random_groups:
+
+            # generating random value measurements
+            read_counts_ints = [random.randint(0, 4000) for _ in range(200)]
+            read_counts_floats = [
+                round(random.random() * 1000, 2) for _ in range(200)
+            ]
+            read_counts_int_floats = random.choices(
+                read_counts_ints + read_counts_floats, k=200
+            )
+
+            read_counts_floats_int_str = (
+                read_counts_ints[:50] + read_counts_floats[:50]
+            )
+            for rand_word in lorem_ipsum_array:
+
+                # updating element in array with string type
+                indx_pos = random.randint(
+                    0, len(read_counts_floats_int_str) - 1
+                )
+                read_counts_floats_int_str[indx_pos] = rand_word
+
+            # creating toy group data
+            results_ints = [group, read_counts_ints]
+            results_floats = [group, read_counts_floats]
+            results_int_floats = [group, read_counts_int_floats]
+            results_int_floats_str = [group, read_counts_floats_int_str]
+
+            # storing group toy data
+            grouped_ints.append(results_ints)
+            grouped_floats.append(results_floats)
+            grouped_int_floats.append(results_int_floats)
+            grouped_int_floats_str.append(results_int_floats_str)
+
+        # writing out data files
+        with open(cls.group_ints, mode="wb") as f:
+            pickle.dump(grouped_ints, f)
+
+        with open(cls.group_floats, mode="wb") as f:
+            pickle.dump(grouped_floats, f)
+
+        with open(cls.group_ints_floats, mode="wb") as f:
+            pickle.dump(grouped_int_floats, f)
+
+        with open(cls.group_ints_floats_str, mode="wb") as f:
+            pickle.dump(grouped_int_floats_str, f)
+
+        with open(cls.seeded_array_counts_ints, mode="wb") as f:
+            random.seed(42)
+            seeded_array = [random.randint(0, 4000) for _ in range(200)]
+            pickle.dump(seeded_array, f)
+
+    @classmethod
+    def tearDown(cls) -> None:
+        os.remove(cls.group_ints)
+        os.remove(cls.group_floats)
+        os.remove(cls.group_ints_floats)
+        os.remove(cls.group_ints_floats_str)
 
 
 if __name__ == "__main__":

@@ -12,10 +12,10 @@ import sys
 import gzip
 import argparse
 from typing import List
-from typung import Union
 from utils import linear_search
 from utils import binary_search
 from utils import index_list
+from utils import filter_by_mean
 from viz_lib import make_box_plot
 
 
@@ -233,6 +233,15 @@ def main() -> None:
         help="Name of generated output plot",
     )
     parser.add_argument(
+        "-t",
+        "--threshold",
+        type=int,
+        dest="threshold",
+        default=0,
+        required=False,
+        help="Assigns a median threshold. Values > Threshold are kept",
+    )
+    parser.add_argument(
         "-wt",
         "--fig_width",
         type=int,
@@ -337,9 +346,19 @@ def main() -> None:
 
         grouped_read_counts.append([tissue_samp, counts])
 
+    # filter group read_counts with given threshold
+    try:
+        filter_by_mean_groups = filter_by_mean(
+            grouped_read_counts, threshold=args.threshold
+        )
+    except TypeError as e:
+        e_type = e.__class__.__name__
+        e_msg = f"{e_type}: None numerical value captured"
+        print(e_msg)
+
     # plot the the collected grouped_read_counts
     make_box_plot(
-        data=grouped_read_counts,
+        data=filter_by_mean_groups,
         gene_name=args.gene,
         output_file=args.output,
         fig_width=args.fig_width,

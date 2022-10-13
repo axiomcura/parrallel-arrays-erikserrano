@@ -16,6 +16,7 @@ utils.py package contains functions that aids in searching and indexing arrays
                index values for each element.
 """
 from typing import Union
+from typing import Optional
 from typing import List
 from typing import Any
 from typing import Sequence
@@ -162,3 +163,99 @@ def index_list(sel_array: List[Any]) -> List[Union[Any, int]]:
 
     indexed_elements = [[elm, idx] for idx, elm in enumerate(sel_array)]
     return indexed_elements
+
+
+def read_count_mean(count_array: List[int]) -> float:
+    """Returns the mean of a given read count
+
+    Parameters
+    ----------
+    count_array : List[int]
+        array that contains read counts of a given group
+
+    Returns
+    -------
+    float
+        mean value of all counts
+
+    Raises
+    ------
+    TypeError
+        if a non numerical type is captured or a List object is not provided
+    """
+    # checking data type
+    if not isinstance(count_array, List):
+        raise TypeError("count_array must be list")
+
+    if len(count_array) == 0:
+        print("Warning: Array with no length captured. Mean set to 0")
+        return 0
+
+    # checking element types
+    for num in count_array:
+        if not isinstance(num, int) and not isinstance(num, float):
+            _type = type(num)
+            msg = f"Only integers and floats allowed, you provided {_type}"
+            raise TypeError(msg)
+
+    # calculating mean
+    _sum = sum(count_array)
+    mean = round(_sum / len(count_array), 2)
+
+    # result
+    return mean
+
+
+def filter_by_mean(
+    grouped_read_counts: List[Any],
+    threshold: Optional[Union[int, float]] = 0,
+) -> List[Union[int, float]]:
+    """Filtering read counts based on mean threshold
+
+    Parameters
+    ----------
+    read_counts : List[Union[int, float]]
+        list of read counts
+
+    Returns
+    -------
+    List[Union[str, int, float]]
+        returns a group list of values that meets the threshold.
+
+    Raises
+    ------
+    TypeError
+        Raised if a List is not provided, group name is not found, or read
+        counts contain non-numerical datatypes.
+    """
+
+    # type checking
+    if not isinstance(grouped_read_counts, List):
+        raise TypeError("grouped_read_counts must be a list")
+    if len(grouped_read_counts) == 0:
+        raise ValueError("Empty list is provided")
+    if not isinstance(grouped_read_counts[0][0], str):
+        raise TypeError("Group name is not found")
+    if not isinstance(threshold, int) and not isinstance(threshold, float):
+        raise TypeError("threshold must be must be an int or float")
+
+    # iterating through group_counts
+    filtered_groups = []
+    for grouped_data in grouped_read_counts:
+
+        if len(grouped_data) == 1:
+            msg = f"{grouped_data[0]} contains no data"
+            continue
+
+        # splitting data group_name and read_counts
+        group_name, read_counts = grouped_data[0], grouped_data[1]
+
+        # calculate the mean
+        mean = read_count_mean(read_counts)
+
+        # store values if mean is higher than the threshold
+        if mean >= threshold:
+            result = [group_name, read_counts]
+            filtered_groups.append(result)
+
+    return filtered_groups
